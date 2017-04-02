@@ -2,6 +2,10 @@
      function SongPlayer(Fixtures) {
           var SongPlayer = {};
 
+          /**
+          * @desc Get the current album
+          * @type {Object}
+          */
           var currentAlbum = Fixtures.getAlbum();
 
           /**
@@ -38,6 +42,10 @@ var playSong = function(song){
   song.playing = true;
 };
 
+/**
+ * @function getSongIndex
+ * @desc Gets the index of current song
+ */
 var getSongIndex = function(song) {
      return currentAlbum.songs.indexOf(song);
  };
@@ -77,6 +85,11 @@ SongPlayer.pause = function(song) {
     song.playing = false;
 };
 
+/**
+* @function previous
+* @desc Selects the previous song
+* @param {Object} song
+*/
 SongPlayer.previous = function() {
      var currentSongIndex = getSongIndex(SongPlayer.currentSong);
      currentSongIndex--;
