@@ -15,7 +15,7 @@
          replace: true,
          restrict: 'E',
          scope: {
-                onChange: '&'
+                onModify: '&'
             },
          link: function(scope, element, attributes) {
            scope.value = 0;
@@ -49,7 +49,7 @@
            scope.onClickSeekBar = function(event) {
              var percent = calculatePercent(seekBar, event);
              scope.value = percent * scope.max;
-             notifyOnChange(scope.value);
+             notifyOnModify(scope.value);
            };
 
            scope.trackThumb = function() {
@@ -57,7 +57,7 @@
                     var percent = calculatePercent(seekBar, event);
                     scope.$apply(function() {
                         scope.value = percent * scope.max;
-                        notifyOnChange(scope.value);
+                        notifyOnModify(scope.value);
                     });
                 });
 
@@ -67,9 +67,9 @@
                 });
             };
 
-            var notifyOnChange = function(newValue) {
-                    if (typeof scope.onChange === 'function') {
-                        scope.onChange({value: newValue});
+            var notifyOnModify = function(newValue) {
+                    if (typeof scope.onModify === 'function') {
+                        scope.onModify({value: newValue});
                     }
                 };
 
