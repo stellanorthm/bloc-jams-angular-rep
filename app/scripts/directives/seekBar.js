@@ -27,9 +27,9 @@
                     scope.value = newValue;
                 });
 
-                attributes.$observe('max', function(newValue) {
+            attributes.$observe('max', function(newValue) {
                     scope.max = newValue;
-                });
+               });
 
            var percentString = function () {
                var value = scope.value;
