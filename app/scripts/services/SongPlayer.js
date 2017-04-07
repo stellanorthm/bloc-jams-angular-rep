@@ -122,6 +122,30 @@ SongPlayer.previous = function() {
 
 
   /**
+  * @function mute
+  * @desc Sets the song to mute and set mute property to true
+  * @param {Object} song
+  */
+  SongPlayer.mute = function() {
+    currentBuzzObject.mute();
+    song.mute = true;
+   };
+
+   /**
+   * @function unMute
+   * @desc Sets the song to unmute and set mute property to false
+   * @param {Object} song
+   */
+   SongPlayer.unMute = function() {
+     currentBuzzObject.unmute();
+     song.mute = false;
+    };
+
+
+
+
+
+  /**
         * @function setCurrentTime
         * @desc Sets the current time in current song
         * @param {Number} time
