@@ -8,36 +8,13 @@
           */
           var currentAlbum = Fixtures.getAlbum();
 
-          /**
-          * @desc Buzz object audio file
-          * @type {Object}
-          */
-          var currentBuzzObject = null;
+/**
+* @desc Buzz object audio file
+* @type {Object}
+*/
+var currentBuzzObject = null;
 
-          /**
-           * @function setSong
-           * @desc Stops currently playing song and loads new audio file as currentBuzzObject
-           * @param {Object} song
-           */
-var setSong = function(song) {
-             if (currentBuzzObject) {
-                 currentBuzzObject.stop();
-                 SongPlayer.currentSong.playing = null;
-             }
 
-             currentBuzzObject = new buzz.sound(song.audioUrl, {
-                 formats: ['mp3'],
-                 preload: true
-             });
-
-             currentBuzzObject.bind('timeupdate', function() {
-         $rootScope.$apply(function() {
-             SongPlayer.currentTime = currentBuzzObject.getTime();
-         });
-     });
-
-             SongPlayer.currentSong = song;
-};
 
 /**
  * @function playSong
@@ -105,6 +82,8 @@ SongPlayer.pause = function(song) {
     song.playing = false;
 };
 
+
+
 /**
 * @function previous
 * @desc Selects the previous song
@@ -141,6 +120,7 @@ SongPlayer.previous = function() {
       }
   };
 
+
   /**
         * @function setCurrentTime
         * @desc Sets the current time in current song
@@ -161,6 +141,35 @@ SongPlayer.previous = function() {
       if (currentBuzzObject) {
         currentBuzzObject.setVolume(volume)
       }
+    };
+
+    /**
+     * @function setSong
+     * @desc Stops currently playing song and loads new audio file as currentBuzzObject
+     * @param {Object} song
+     */
+    var setSong = function(song) {
+       if (currentBuzzObject) {
+           currentBuzzObject.stop();
+           SongPlayer.currentSong.playing = null;
+       }
+
+       currentBuzzObject = new buzz.sound(song.audioUrl, {
+           formats: ['mp3'],
+           preload: true
+       });
+
+       currentBuzzObject.bind('timeupdate', function() {
+        $rootScope.$apply(function() {
+          SongPlayer.currentTime = currentBuzzObject.getTime();
+          var total = currentBuzzObject.getDuration();
+          if(SongPlayer.currentTime === total){
+            SongPlayer.next();
+          }
+          });
+      });
+
+       SongPlayer.currentSong = song;
     };
 
 
