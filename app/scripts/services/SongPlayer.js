@@ -14,15 +14,13 @@
 */
 var currentBuzzObject = null;
 
-
-
 /**
  * @function playSong
  * @desc Play the current Buzz object & set the playing song property to true
  */
 var playSong = function(song){
   currentBuzzObject.play();
-  song.playing = true;
+	song.playing = true;
 };
 
 /**
@@ -31,8 +29,40 @@ var playSong = function(song){
  */
 var stopSong = function(song){
   currentBuzzObject.stop();
-  song.playing = null;
+  song.playing = false;
 };
+
+
+/**
+ * @function setSong
+ * @desc Stops currently playing song and loads new audio file as currentBuzzObject
+ * @param {Object} song
+ */
+var setSong = function(song) {
+   if (currentBuzzObject) {
+       currentBuzzObject.stop();
+       SongPlayer.currentSong.playing = null;
+   }
+
+   currentBuzzObject = new buzz.sound(song.audioUrl, {
+       formats: ['mp3'],
+       preload: true
+   });
+
+   currentBuzzObject.bind('timeupdate', function() {
+      $rootScope.$apply(function() {
+        SongPlayer.currentTime = currentBuzzObject.getTime();
+        var total = currentBuzzObject.getDuration();
+        if(SongPlayer.currentTime === total){
+          SongPlayer.next();
+        }
+        });
+      });
+
+   SongPlayer.currentSong = song;
+};
+
+
 
 /**
  * @function getSongIndex
@@ -54,22 +84,34 @@ SongPlayer.currentSong = null;
  */
  SongPlayer.currentTime = null;
 
+ /**
+       * @desc Volume used for songs
+       * @type {Number}
+       */
+       SongPlayer.volume = 90;
+
 /**
 * @function play
 * @desc Play current or new song
 * @param {Object} song
 */
 SongPlayer.play = function(song) {
-    song = song || SongPlayer.currentSong;
-    if (SongPlayer.currentSong !== song) {
-        setSong(song);
-        playSong(song);
-    } else if (SongPlayer.currentSong === song) {
-        if (currentBuzzObject.isPaused()) {
-            playSong(song);
+			song = song || SongPlayer.currentSong;
+			if (SongPlayer.currentSong !== song) {
+				setSong(song);
+				playSong(song);
+			} else if (SongPlayer.currentSong == song) {
+        if (currentBuzzObject == null){
+          currentBuzzObject = getSongIndex(SongPlayer.currentSong);
+          currentBuzzObject++;
+          var song = currentAlbum.songs[currentBuzzObject];
+          setSong(song);
         }
-   }
-};
+				if (currentBuzzObject.isPaused()) {
+					playSong(song);
+				}
+			}
+		};
 
 /**
 * @function pause
@@ -109,6 +151,7 @@ SongPlayer.previous = function() {
  */
  SongPlayer.next = function() {
       var currentSongInd = getSongIndex(SongPlayer.currentSong);
+      console.log(currentSongInd);
       currentSongInd++;
 
       if (currentSongInd < 0) {
@@ -122,27 +165,19 @@ SongPlayer.previous = function() {
 
 
   /**
-  * @function mute
-  * @desc Sets the song to mute and set mute property to true
+  * @function toggleMute
+  * @desc Sets the song to mute or unmute
   * @param {Object} song
   */
-  SongPlayer.mute = function() {
-    currentBuzzObject.mute();
-    song.mute = true;
+  SongPlayer.toggleMute = function() {
+    if (currentBuzzObject.isMuted()){
+      currentBuzzObject.unmute();
+      SongPlayer.currentSong.muted = false;
+      } else {
+      currentBuzzObject.mute();
+      SongPlayer.currentSong.muted = true;
+      }
    };
-
-   /**
-   * @function unMute
-   * @desc Sets the song to unmute and set mute property to false
-   * @param {Object} song
-   */
-   SongPlayer.unMute = function() {
-     currentBuzzObject.unmute();
-     song.mute = false;
-    };
-
-
-
 
 
   /**
@@ -165,35 +200,6 @@ SongPlayer.previous = function() {
       if (currentBuzzObject) {
         currentBuzzObject.setVolume(volume)
       }
-    };
-
-    /**
-     * @function setSong
-     * @desc Stops currently playing song and loads new audio file as currentBuzzObject
-     * @param {Object} song
-     */
-    var setSong = function(song) {
-       if (currentBuzzObject) {
-           currentBuzzObject.stop();
-           SongPlayer.currentSong.playing = null;
-       }
-
-       currentBuzzObject = new buzz.sound(song.audioUrl, {
-           formats: ['mp3'],
-           preload: true
-       });
-
-       currentBuzzObject.bind('timeupdate', function() {
-        $rootScope.$apply(function() {
-          SongPlayer.currentTime = currentBuzzObject.getTime();
-          var total = currentBuzzObject.getDuration();
-          if(SongPlayer.currentTime === total){
-            SongPlayer.next();
-          }
-          });
-      });
-
-       SongPlayer.currentSong = song;
     };
 
 
