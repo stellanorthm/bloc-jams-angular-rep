@@ -4,8 +4,8 @@ body.landing {
 
 .hero-content {
     position: relative;
-    min-height: 600px;
-    background-image: url(../assets/images/bloc_jams_bg.jpg);
+    min-height: 430px;
+    background-image: url(../assets/images/bloc_jams_bg2.jpg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -13,16 +13,64 @@ body.landing {
 
 .hero-content .hero-title {
     position: absolute;
-    top: 40%;
+    top: 67%;
     -webkit-transform: translateY(-50%);
     -moz-transform: translateY(-50%);
     transform: translateY(-50%);
     width: 100%;
     text-align: center;
-    font-size: 4rem;
-    font-weight: 300;
+    font-size: 2rem;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5rem;
+    text-shadow: 1px 1px 0px rgb(58,23,63);
+}
+
+/* Medium screens (640px) */
+@media (max-width: 640px) {
+  .hero-content .hero-title {
+      position: absolute;
+      top: 47%;
+      -webkit-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+      transform: translateY(-50%);
+      width: 100%;
+      text-align: center;
+      font-size: 2.3rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5rem;
+      text-shadow: 1px 1px 0px rgb(58,23,63);
+  }
+
+  .hero-content .hero-title2 {
+      position: absolute;
+      top: 65%;
+      -webkit-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+      transform: translateY(-50%);
+      width: 100%;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.3rem;
+      text-shadow: 1px 1px 0px rgb(58,23,63);
+  }
+}
+
+.hero-content .hero-title2 {
+    position: absolute;
+    top: 77%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.3rem;
     text-shadow: 1px 1px 0px rgb(58,23,63);
 }
 
@@ -31,9 +79,8 @@ body.landing {
 }
 
 .point {
-  
+    margin-top:-25px;
     position: relative;
-    padding: 2rem;
     text-align: center;
      -webkit-transform: scaleX(0.9) translateY(3rem);
      -moz-transform: scaleX(0.9) translateY(3rem);
@@ -50,9 +97,9 @@ body.landing {
     font-size: 1.25rem;
 }
 
-.ion-music-note,
-.ion-radio-waves,
-.ion-iphone {
+.ion-ios-musical-note,
+.ion-android-laptop,
+.ion-android-walk,.ion-android-checkmark-circle {
     color: rgb(233,50,117);
-    font-size: 5rem;
+    font-size: 4rem;
 }
