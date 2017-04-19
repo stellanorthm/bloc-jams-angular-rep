@@ -180,16 +180,16 @@ SongPlayer.previous = function() {
    };
 
 
-  /**
-        * @function setCurrentTime
-        * @desc Sets the current time in current song
-        * @param {Number} time
-        */
-        SongPlayer.setCurrentTime = function(time) {
-            if (currentBuzzObject) {
-                currentBuzzObject.setTime(time);
-            }
-        };
+   /**
+ * @function setCurrentTime
+ * @desc Set current time (in seconds) of currently playing song
+ * @param {Number} time
+ */
+ SongPlayer.setCurrentTime = function(time) {
+     if (currentBuzzObject) {
+         currentBuzzObject.setTime(time);
+     }
+ };
 
         /**
      * @function setVolume

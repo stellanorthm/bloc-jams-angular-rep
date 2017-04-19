@@ -1,8 +1,8 @@
 (function() {
-     function Fixtures() {
-         var Fixtures = {};
+    function Fixtures() {
+    var Fixtures = {};
 
-        var albumPicasso = {
+    var albumPicasso = {
         title: 'The Power Is YOURS!',
         artist: 'Doctor Pain',
         label: 'MTV',
