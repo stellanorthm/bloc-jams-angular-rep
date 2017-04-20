@@ -151,11 +151,12 @@ SongPlayer.previous = function() {
  */
  SongPlayer.next = function() {
       var currentSongInd = getSongIndex(SongPlayer.currentSong);
-      console.log(currentSongInd);
       currentSongInd++;
 
-      if (currentSongInd < 0) {
-          stopSong(song);
+      var lastSongInd = currentAlbum.songs.length - 1;
+
+      if (currentSongInd > lastSongInd) {
+          stopSong(SongPlayer.currentSong);
       } else {
           var song = currentAlbum.songs[currentSongInd];
           setSong(song);
