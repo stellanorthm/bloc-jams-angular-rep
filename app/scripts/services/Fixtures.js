@@ -2,7 +2,7 @@
     function Fixtures() {
     var Fixtures = {};
 
-    var albumPicasso = {
+    var albumPower = {
         title: 'The Power Is YOURS!',
         artist: 'Doctor Pain',
         label: 'MTV',
@@ -33,13 +33,15 @@
     };
 
     Fixtures.getAlbum = function() {
-         return albumPicasso;
+         return albumPower;
      };
 
-     Fixtures.getCollection = function(numberOfAlbums) {
+     var numberOfAlbums = [albumPower];
+
+     Fixtures.getCollection = function() {
        var array = [];
-       for (var i = 0; i < numberOfAlbums; i++) {
-         array.push(albumPicasso);
+       for (var i = 0; i < numberOfAlbums.length; i++) {
+         array.push(numberOfAlbums[i]);
        }
        return array;
       };
