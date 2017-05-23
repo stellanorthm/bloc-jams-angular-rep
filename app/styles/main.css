@@ -25,6 +25,10 @@ body {
     min-height: 100%;
 }
 
+.point-description {
+      padding-bottom: 27px;
+}
+
 /* Medium and small screens (640px) */
  @media (min-width: 640px) {
    /* Style information will go here */
